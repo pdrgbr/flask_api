@@ -50,7 +50,7 @@ def recommender():
     if not input_songs:
         return jsonify({"error": "No 'songs' key found in the request data"}), 400
 
-    association_rules_file_path = 'association_rules.txt'
+    association_rules_file_path = '/home/pedroribeiro/project2-pv/association_rules.txt'
     code_info,rules = read_association_rules(association_rules_file_path)
 
     recommendations = get_recommendations(input_songs, rules)
