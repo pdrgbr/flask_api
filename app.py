@@ -54,10 +54,11 @@ def recommender():
     code_info,rules = read_association_rules(association_rules_file_path)
 
     recommendations = get_recommendations(input_songs, rules)
-    print(code_info)
+    version = '1.0'
+    
     if recommendations:
         return jsonify({
-            "version" : code_info[0],
+            "version" : version,
             "run_time" : code_info[1],
             "recommendations": list(set(song for sublist in recommendations for song in sublist))})
     else:
