@@ -24,7 +24,7 @@ kubectl -n pedroribeiro apply -f deployment.yaml
 kubectl -n pedroribeiro apply -f service.yaml
 
 ## Alterar número de réplicas do Deployment
-kubectl scale deployment pedroribeiro-playlist-recommender-deployment --replicas=1 -n pedroribeiro
+kubectl scale deployment pedroribeiro-playlist-recommender-deployment --replicas=X -n pedroribeiro
 
 ## Obter detalhes do Deployment
 kubectl describe deployment pedroribeiro-playlist-recommender-deployment -n pedroribeiro   
@@ -50,3 +50,19 @@ argocd app create pedroribeiro-api \
 
 ## Obter status da aplicação no ArgoCD
 argocd app get pedroribeiro-api 
+
+# Teste do sistema
+
+Para garantir que tudo está funcionando execute o comando:
+
+wget --server-response \
+	   --output-document response.out \
+	   --header='Content-Type: application/json' \
+	   --post-data '{"songs": ["Crash And Burn"]}' \
+	   http://$CLUSTER-IP:32210/api/recommender
+
+É esperado que seja criado um arquivo response.out contendo uma lista de nomes de músicas sugeridas.
+
+Para obter o $CLUSTER-IP execute o comando: 
+
+kubectl -n pedroribeiro get service 
