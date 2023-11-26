@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api-container
-        image: pdrgbr/flask-api:0.3
+        image: pdrgbr/flask-api:0.4
         ports:
         - containerPort: 32210
         volumeMounts:
